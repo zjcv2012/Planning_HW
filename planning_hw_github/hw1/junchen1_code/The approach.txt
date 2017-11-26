@@ -1,0 +1,7 @@
+Basically, I used a weighted A*(f=g+3*h) to plan a path from the robot location to the goal location, considering x,y and theta. But it may take a long time to plan a path in the beginning, so I create a function called generateH(), which implements Dijkstra's algorithm starting from the intial goal location to calculate the heuristic(manhattan distance times a factor) for the first plan. The code will record the time for generating the map and will break if it takes more than 0.9s.
+
+After the first plan, a path will be generated and stored to reach the intial goal. Since the goal is moving, the robot will follow the path until the robot reaches the initial goal or the robot is close enough to the current goal. Then, the planner is called again and the heuristic function switches from the generated map using Dijkstra to euclidean distance. And after the first plan, the planned path will not be saved and the robot will only move once. The program won't stop until the robot chases the target.
+
+
+Important note: need to compile the code everytime to run a new mission(mex -v CXXFLAGS="$CXXFLAGS -std=c++11" -largeArrayDims planner.cpp), to clear all the global variables in the program.
+
